@@ -1,0 +1,35 @@
+int switchPin=8;
+int ledPin=11;
+boolean lastButton= LOW;
+boolean currentButton= LOW;
+int ledlevel= 0;
+
+void setup()
+{
+  pinMode(switchPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+}
+boolean debounce(boolean last)
+{
+  boolean current=digitalRead(switchPin);
+  if (last != current)
+  {
+    delay(5);
+    current=digitalRead(swichPin);
+  }
+  return current;
+}
+
+void loop()
+{
+  currentButton= debounce(lastbutton);
+  if (lastbutton==LOW && currentBUtton==HIGH)
+  {
+    ledLevel=ledLevel+ 5l;
+  }
+
+  lastButton= currentButton;
+
+  if (ledLevel >255) ledLevel=0;
+  analogWrite(ledPin, ledLevel);
+}
